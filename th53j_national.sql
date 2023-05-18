@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： localhost
--- 產生時間： 2023-05-18 09:10:59
+-- 產生時間： 2023-05-18 11:04:08
 -- 伺服器版本： 10.4.24-MariaDB
 -- PHP 版本： 8.1.6
 
@@ -43,12 +43,12 @@ INSERT INTO `admin` (`id`, `acc`, `pw`) VALUES
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `shuttle_buses`
+-- 資料表結構 `buses`
 --
 
-CREATE TABLE `shuttle_buses` (
+CREATE TABLE `buses` (
   `id` int(10) UNSIGNED NOT NULL,
-  `plate` int(11) NOT NULL,
+  `plate` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `minute` time NOT NULL DEFAULT '00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -76,9 +76,9 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- 資料表索引 `shuttle_buses`
+-- 資料表索引 `buses`
 --
-ALTER TABLE `shuttle_buses`
+ALTER TABLE `buses`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -98,9 +98,9 @@ ALTER TABLE `admin`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `shuttle_buses`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `buses`
 --
-ALTER TABLE `shuttle_buses`
+ALTER TABLE `buses`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --

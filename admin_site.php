@@ -29,10 +29,10 @@
     </div>
     <div class="add" style="display:none">
         <h1 class="border text-center p-3">新增站點</h1>
-        <form action="./api/add_site.php">
+        <form action="./api/add_site.php" method="post">
             <div class="form-group row">
                 <label for="" class="col-3 col-form-label">站點名稱</label>
-                <input type="text" name='plate' class="form-control col-9">
+                <input type="text" name='name' class="form-control col-9">
             </div>
             <div class="form-group row">
                 <label for="" class="col-3 col-form-label">行駛時間(分鐘)</label>
@@ -50,7 +50,7 @@
     </div>
     <div class="edit" style="display:none">
         <h1 class="border text-center p-3">修改"XXXX"</h1>
-        <form action="./api/edit_site.php">
+        <form action="./api/edit_site.php" method="post">
             <div class="form-group row">
                 <label for="" class="col-3 col-form-label">行駛時間(分鐘)</label>
                 <input type="text" name='minute' class="form-control col-9">
