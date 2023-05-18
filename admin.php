@@ -10,8 +10,18 @@
 </head>
 <body>
 <?php include "header.php";?>
+<?php
+$target=$_GET['target']??'admin_bus';
+$file=$target.".php";
+
+if(file_exists($file)){
+    include $file;
+}else{
+    include "admin_bus.php";
+}
 
 
+?>
 <script src="./jquery-3.7.0.min.js"></script>
 <script src="./bootstrap/bootstrap.js"></script>
 </body>

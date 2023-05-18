@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： localhost
--- 產生時間： 2023-05-18 08:03:58
+-- 產生時間： 2023-05-18 09:10:59
 -- 伺服器版本： 10.4.24-MariaDB
 -- PHP 版本： 8.1.6
 
@@ -49,7 +49,7 @@ INSERT INTO `admin` (`id`, `acc`, `pw`) VALUES
 CREATE TABLE `shuttle_buses` (
   `id` int(10) UNSIGNED NOT NULL,
   `plate` int(11) NOT NULL,
-  `times` time NOT NULL DEFAULT '00:00:00'
+  `minute` time NOT NULL DEFAULT '00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
