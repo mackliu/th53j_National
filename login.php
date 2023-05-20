@@ -20,7 +20,7 @@
 
 
     ?>
-    <div class="row w-full">
+    <div class="row w-200">
         <label for="" class="col-2">帳號</label>   
         <input  type="text" name="acc" id="acc" class='form-group form-control col-10'>
     </div>

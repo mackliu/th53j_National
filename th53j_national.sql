@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2023-05-20 08:38:38
+-- 產生時間： 2023-05-20 09:36:50
 -- 伺服器版本： 10.4.27-MariaDB
 -- PHP 版本： 8.2.0
 
@@ -33,6 +33,13 @@ CREATE TABLE `admin` (
   `pw` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- 傾印資料表的資料 `admin`
+--
+
+INSERT INTO `admin` (`id`, `acc`, `pw`) VALUES
+(1, 'admin', '1234');
+
 -- --------------------------------------------------------
 
 --
@@ -44,6 +51,14 @@ CREATE TABLE `bus` (
   `name` text NOT NULL,
   `minute` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- 傾印資料表的資料 `bus`
+--
+
+INSERT INTO `bus` (`id`, `name`, `minute`) VALUES
+(1, 'A1234', '00:00:15'),
+(2, 'A2345', '00:00:25');
 
 -- --------------------------------------------------------
 
@@ -88,13 +103,13 @@ ALTER TABLE `station`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `bus`
 --
 ALTER TABLE `bus`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `station`
