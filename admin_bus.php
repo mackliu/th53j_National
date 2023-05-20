@@ -22,11 +22,11 @@
 
     <div class="row w-full">
         <label for="" class="col-2">車牌</label>   
-        <input  type="text" name="acc" id="acc" class='form-group form-control col-10'>
+        <input  type="text" name="name" id="name" class='form-group form-control col-10'>
     </div>
     <div class="row w-full">
         <label for="" class="col-2">已行駛時間(分鐘)</label>   
-        <input  type="password" name="pw" id="pw" class='form-group form-control col-10'>
+        <input  type="number" name="minute" id="minute" class='form-group form-control col-10'>
     </div>
     <div class="row w-full">
         <input  type="submit" value="新增" class='col-12 btn btn-success my-1'>
@@ -40,7 +40,7 @@
     <form action="./api/edit_bus.php" method="post">
     <div class="row w-full">
         <label for="" class="col-2">已行駛時間(分鐘)</label>   
-        <input  type="password" name="pw" id="pw" class='form-group form-control col-10'>
+        <input  type="number" name="minute" id="minute" class='form-group form-control col-10'>
     </div>
     <div class="row w-full">
         <input  type="submit" value="修改" class='col-12 btn btn-success my-1'>
