@@ -13,7 +13,13 @@
 <div class="container">
     <h1 class="text-center">網站管理-登入</h1>
     <form action="./api/login.php" method="post">
+    <?php 
+        if(isset($_GET['error'])){
+            echo "<div class='text-danger text-center my-3'>帳號或密碼錯誤</div>";
+        }
 
+
+    ?>
     <div class="row w-full">
         <label for="" class="col-2">帳號</label>   
         <input  type="text" name="acc" id="acc" class='form-group form-control col-10'>
