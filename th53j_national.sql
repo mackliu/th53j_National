@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- 主機： localhost
--- 產生時間： 2023-05-18 11:04:08
--- 伺服器版本： 10.4.24-MariaDB
--- PHP 版本： 8.1.6
+-- 主機： 127.0.0.1
+-- 產生時間： 2023-05-20 08:38:38
+-- 伺服器版本： 10.4.27-MariaDB
+-- PHP 版本： 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- 資料庫： `th53j_national`
+-- 資料庫： `db15`
 --
 
 -- --------------------------------------------------------
@@ -29,40 +29,33 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admin` (
   `id` int(10) UNSIGNED NOT NULL,
-  `acc` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pw` text COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- 傾印資料表的資料 `admin`
---
-
-INSERT INTO `admin` (`id`, `acc`, `pw`) VALUES
-(1, 'admin', '1234');
-
--- --------------------------------------------------------
-
---
--- 資料表結構 `buses`
---
-
-CREATE TABLE `buses` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `plate` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `minute` time NOT NULL DEFAULT '00:00:00'
+  `acc` text NOT NULL,
+  `pw` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `sites`
+-- 資料表結構 `bus`
 --
 
-CREATE TABLE `sites` (
+CREATE TABLE `bus` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `minute` time NOT NULL DEFAULT '00:00:00',
-  `waiting` time NOT NULL DEFAULT '00:00:00'
+  `name` text NOT NULL,
+  `minute` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `station`
+--
+
+CREATE TABLE `station` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` text NOT NULL,
+  `minute` time NOT NULL,
+  `waiting` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -76,15 +69,15 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- 資料表索引 `buses`
+-- 資料表索引 `bus`
 --
-ALTER TABLE `buses`
+ALTER TABLE `bus`
   ADD PRIMARY KEY (`id`);
 
 --
--- 資料表索引 `sites`
+-- 資料表索引 `station`
 --
-ALTER TABLE `sites`
+ALTER TABLE `station`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -95,18 +88,18 @@ ALTER TABLE `sites`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- 使用資料表自動遞增(AUTO_INCREMENT) `buses`
---
-ALTER TABLE `buses`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `sites`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `bus`
 --
-ALTER TABLE `sites`
+ALTER TABLE `bus`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `station`
+--
+ALTER TABLE `station`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 COMMIT;
 
