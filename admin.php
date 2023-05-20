@@ -9,6 +9,30 @@
 </head>
 <body>
 <?php include "header.php";?>
+<a href="?pos=bus">接駁車管理</a>
+<a href="?pos=station">站點管理</a>
+
+<?php
+/*     if(isset($_GET['pos'])){
+        $pos=$_GET['pos'];
+    }else{
+        $pos='bus';
+    } */
+
+    /* $pos=(isset($_GET['pos']))?$_GET['pos']:"bus"; */
+
+    $pos=$_GET['pos']??'bus';
+
+    switch($pos){
+        case "bus":
+            include "admin_bus.php";
+        break;
+        case "station":
+            include "admin_station.php";
+        break;
+    }
+
+?>
 
 <script src="./jquery/jquery.js"></script>
 <script src="./bootstrap/bootstrap.js"></script>
