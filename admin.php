@@ -14,7 +14,7 @@
         <a class="btn btn-light active" href="?pos=bus">接駁車管理</a>
         <a class="btn btn-light " href="?pos=station">站點管理</a>
     </div>
-    <h1 class="border p-3 text-center my-3">接駁車管理 <button class="btn btn-success">新增</button></h1>
+    
     <?php
     /*     if(isset($_GET['pos'])){
             $pos=$_GET['pos'];
