@@ -1,4 +1,4 @@
-<header class="shadow-sm p-3 row col-12" style="height:100px">
+<header class="shadow-sm p-3 row w-full" style="height:100px">
 <div class="col-6">
     <img src="" alt="" style="width:60px;height:60px;">
     南港展覽館接駁專車系統
