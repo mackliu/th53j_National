@@ -10,13 +10,8 @@
 <body>
 <?php include "header.php";?>
 <div class="container mt-5">
-    <div class="border p-3">
-        <a class="btn btn-light active" href="?pos=bus">接駁車管理</a>
-        <a class="btn btn-light " href="?pos=station">站點管理</a>
-    </div>
-    
     <?php
-    /*     if(isset($_GET['pos'])){
+/*     if(isset($_GET['pos'])){
             $pos=$_GET['pos'];
         }else{
             $pos='bus';
@@ -25,6 +20,14 @@
         /* $pos=(isset($_GET['pos']))?$_GET['pos']:"bus"; */
 
         $pos=$_GET['pos']??'bus';
+    ?>
+    <div class="border p-3">
+        <a class="btn btn-light <?=($pos=='bus')?'active':'';?>" href="?pos=bus">接駁車管理</a>
+        <a class="btn btn-light <?=($pos=='station')?'active':'';?>" href="?pos=station">站點管理</a>
+    </div>
+    
+    <?php
+
 
         switch($pos){
             case "bus":
