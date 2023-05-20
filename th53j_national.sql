@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- 主機： 127.0.0.1
--- 產生時間： 2023-05-20 09:36:50
--- 伺服器版本： 10.4.27-MariaDB
--- PHP 版本： 8.2.0
+-- 主機： localhost
+-- 產生時間： 2023-05-21 01:58:50
+-- 伺服器版本： 10.4.24-MariaDB
+-- PHP 版本： 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- 資料庫： `db15`
+-- 資料庫： `th53j_national`
 --
 
 -- --------------------------------------------------------
@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admin` (
   `id` int(10) UNSIGNED NOT NULL,
-  `acc` text NOT NULL,
-  `pw` text NOT NULL
+  `acc` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pw` text COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -48,8 +48,8 @@ INSERT INTO `admin` (`id`, `acc`, `pw`) VALUES
 
 CREATE TABLE `bus` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` text NOT NULL,
-  `minute` time NOT NULL
+  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `minute` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -57,8 +57,8 @@ CREATE TABLE `bus` (
 --
 
 INSERT INTO `bus` (`id`, `name`, `minute`) VALUES
-(1, 'A1234', '00:00:15'),
-(2, 'A2345', '00:00:25');
+(1, 'A1234', 15),
+(2, 'A2345', 25);
 
 -- --------------------------------------------------------
 
@@ -68,9 +68,9 @@ INSERT INTO `bus` (`id`, `name`, `minute`) VALUES
 
 CREATE TABLE `station` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` text NOT NULL,
-  `minute` time NOT NULL,
-  `waiting` time NOT NULL
+  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `minute` int(10) NOT NULL,
+  `waiting` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
