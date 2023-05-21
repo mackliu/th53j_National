@@ -27,18 +27,18 @@
      </table>
  </div>
  <div class="add" style="display:none">
- <h1 class="border p-3 my-3 text-center">新增接駁車</h1>
+ <h1 class="border p-3 my-3 text-center w-100">新增接駁車</h1>
     <form action="./api/add_bus.php" method="post">
 
-    <div class="row w-full">
+    <div class="row w-100">
         <label for="" class="col-2">車牌</label>   
         <input  type="text" name="name" id="name" class='form-group form-control col-10'>
     </div>
-    <div class="row w-full">
+    <div class="row w-100">
         <label for="" class="col-2">已行駛時間(分鐘)</label>   
         <input  type="number" name="minute" id="minute1" class='form-group form-control col-10'>
     </div>
-    <div class="row w-full">
+    <div class="row w-100">
         <input  type="submit" value="新增" class='col-12 btn btn-success my-1'>
         <input  type="button" value="回上頁" class='col-12 btn btn-secondary my-1'  onclick="$('.list').show();$('.edit,.add').hide()">
     </div>
@@ -48,11 +48,11 @@
  <div class="edit" style="display:none">
  <h1 class="border p-3 my-3 text-center">修改「<span id="title"></span>」接駁車</h1>
     <form action="./api/edit_bus.php" method="post">
-    <div class="row w-full">
+    <div class="row w-100">
         <label for="" class="col-2">已行駛時間(分鐘)</label>   
         <input  type="number" name="minute" id="minute2" class='form-group form-control col-10'>
     </div>
-    <div class="row w-full">
+    <div class="row w-100">
         <input  type="submit" value="修改" class='col-12 btn btn-success my-1'>
         <input  type="button" value="回上頁" class='col-12 btn btn-secondary my-1' onclick="$('.list').show();$('.edit,.add').hide()">
     </div>
