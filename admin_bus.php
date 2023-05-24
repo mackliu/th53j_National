@@ -64,6 +64,7 @@
         <input  type="number" name="minute" id="editMinute" class='form-group form-control col-10'>
     </div>
     <div class="row w-100">
+        <input type="hidden" name="id" id="editId" value="">
         <input  type="submit" value="修改" class='col-12 btn btn-success my-1'>
                                                                            <!-- 在按鈕標籤中直接觸發onclick事件，並在事件發生時執行：
                                                                                 1.使用jquery來切換畫面上各區塊的顯示狀態 -->
@@ -81,12 +82,14 @@
         //使用getJSON向後端api get_bus.php發出取得資料的請求
         $.getJSON('./api/get_bus.php',{id},(bus)=>{
             //api 回傳的資料會是一個json格式的物件
-
+            console.log(bus)
             //將bus物件中的name資料寫入到頁面上id為title的tag中
             $("#title").html(bus.name);
 
             //將bus物件中的minute資料寫入到頁面上id為editMinute的input欄位的值
             $("#editMinute").val(bus.minute);
+
+            $("#editId").val(bus.id);
         })
     }
  </script>
