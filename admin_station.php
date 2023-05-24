@@ -65,7 +65,7 @@
         <input  type="number" name="waiting" id="editWaiting" class='form-group form-control col-10'>
     </div>
     <div class="row w-100">
-        <input type="hidden" name="id" value="">
+        <input type="hidden" name="id" id="editId" value="">
         <input  type="submit" value="修改" class='col-12 btn btn-success my-1'>
         <input  type="button" value="回上頁" class='col-12 btn btn-secondary my-1' onclick="$('.list').show();$('.edit,.add').hide()">
     </div>
