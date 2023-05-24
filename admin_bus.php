@@ -61,7 +61,7 @@
     <form action="./api/edit_bus.php" method="post">
     <div class="row w-100">
         <label for="" class="col-2">已行駛時間(分鐘)</label>   
-        <input  type="number" name="minute" id="editMminute" class='form-group form-control col-10'>
+        <input  type="number" name="minute" id="editMinute" class='form-group form-control col-10'>
     </div>
     <div class="row w-100">
         <input  type="submit" value="修改" class='col-12 btn btn-success my-1'>
