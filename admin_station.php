@@ -9,15 +9,25 @@
         <td class="col-3">停留時間(分鐘)</td>
         <td class="col-3">操作</td>
     </tr>
+    <?php
+        $sql="select * from `station`";
+
+        $rows=$pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($rows as $row){
+    ?>
     <tr>
-        <td>dfasfs</td>
-        <td>12</td>
-        <td>32</td>
+        <td><?=$row['name'];?></td>
+        <td><?=$row['minute'];?></td>
+        <td><?=$row['waiting'];?></td>
         <td>
-            <button class="btn btn-warning" onclick="$('.edit').show();$('.list,.add').hide()">編輯</button>
+            <button class="btn btn-warning" onclick="edit(<?=$row['id'];?>);$('.edit').show();$('.list,.add').hide()">編輯</button>
             <button class="btn btn-danger">刪除</button>
         </td>
     </tr>    
+    <?php
+        }
+    ?>    
     </table>
 </div>
 <div class="add" style="display:none">
@@ -48,11 +58,11 @@
     <form action="./api/edit_station.php" method="post">
     <div class="row w-100">
         <label for="" class="col-2">行駛時間(分鐘)</label>   
-        <input  type="number" name="minute" id="minute" class='form-group form-control col-10'>
+        <input  type="number" name="minute" id="editMinute" class='form-group form-control col-10'>
     </div>
     <div class="row w-100">
         <label for="" class="col-2">停留時間(分鐘)</label>   
-        <input  type="number" name="waiting" id="waiting" class='form-group form-control col-10'>
+        <input  type="number" name="waiting" id="editWaiting" class='form-group form-control col-10'>
     </div>
     <div class="row w-100">
         <input  type="submit" value="修改" class='col-12 btn btn-success my-1'>
