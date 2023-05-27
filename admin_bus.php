@@ -62,6 +62,7 @@
     <div class="row w-100">
         <label for="" class="col-2">已行駛時間(分鐘)</label>   
         <input  type="number" name="minute" id="editMinute" class='form-group form-control col-10'>
+        <input type="hidden" name="id" id="editId">
     </div>
     <div class="row w-100">
         <input  type="submit" value="修改" class='col-12 btn btn-success my-1'>
@@ -87,6 +88,9 @@
 
             //將bus物件中的minute資料寫入到頁面上id為editMinute的input欄位的值
             $("#editMinute").val(bus.minute);
+
+            //將bus物件中的id資料寫入到頁面上id為editId的input欄位的值
+            $("#editId").val(bus.id);
         })
     }
  </script>
