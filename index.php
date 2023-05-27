@@ -63,6 +63,20 @@
             position:absolute;
             left:0;
         }
+        .connect{
+            width:18px;
+            height:100px;
+            background:skyblue;
+            top:50%;
+        }
+        .connect-right{
+            position:absolute;
+            right:0;
+        }
+        .connect-left{
+            position:absolute;
+            left:0;
+        }
     </style>
 </head>
 <body>
@@ -92,10 +106,19 @@ echo "</pre>"; */
 
 foreach($tmp as $key => $t){
     if($key%2==1){
-        echo "<div class='d-flex w-100 justify-content-end'>";
+        echo "<div class='d-flex w-100 justify-content-end position-relative'>";
     }else{
-        echo "<div class='d-flex w-100'>";
+        echo "<div class='d-flex w-100 position-relative'>";
     }
+
+    if((ceil(count($stations)/3)-1)>$key){
+        if($key%2==1){
+            echo "<div class='connect connect-left'></div>";
+        }else{
+            echo "<div class='connect connect-right'></div>";
+        }
+    }
+
     foreach($t as $k => $station){
 
         if($key==0 && $k==0 ){
@@ -119,7 +142,7 @@ foreach($tmp as $key => $t){
             echo "<div class='block line'>";
         }
         echo "接駁車";
-        echo "<div class='point'>$key</div>";
+        echo "<div class='point'></div>";
         echo $station['name'];
         echo "</div>";
     }
