@@ -17,6 +17,7 @@
             flex-direction:column;
             justify-content:center;
             align-items:center;
+            position:relative;
 
 
         }
@@ -28,6 +29,8 @@
             display: flex;
             justify-content:center;
             align-items:center;
+            position:relative;
+            z-index:10;
         }
         .point::before{
             content:"";
@@ -35,6 +38,30 @@
             height:20px;
             border:3px solid white;
             border-radius:50%;
+        }
+        .right::after{
+            content:"";
+            width:50%;
+            height:18px;
+            background-color:skyblue;
+            position:absolute;
+            right:0;
+        }
+        .left::after{
+            content:"";
+            width:50%;
+            height:18px;
+            background-color:skyblue;
+            position:absolute;
+            left:0;
+        }
+        .line::after{
+            content:"";
+            width:100%;
+            height:18px;
+            background-color:skyblue;
+            position:absolute;
+            left:0;
         }
     </style>
 </head>
@@ -48,13 +75,13 @@ $tmp=[];
 foreach($stations as $key => $station){
     $tmp[floor($key/3)][]=$station;
 }
-/* echo "<pre>";
-print_r($tmp);
-echo "</pre>"; */
+/* echo "<pre>"; */
+/* print_r($tmp); */
+/* echo "</pre>"; */
 
 foreach($tmp as $k => $t){
     if($k%2==1){
-        krsort($t);
+        array_reverse($t);
         $tmp[$k]=$t;
     }
 }
@@ -69,10 +96,30 @@ foreach($tmp as $key => $t){
     }else{
         echo "<div class='d-flex w-100'>";
     }
-    foreach($t as $station){
-        echo "<div class='block'>";
+    foreach($t as $k => $station){
+
+        if($key==0 && $k==0 ){
+            echo "<div class='block right'>";
+        }else if($key==ceil(count($stations)/3)-1){
+       
+            if($key%2==0){
+                if($k==count($t)-1){
+                    echo "<div class='block left'>";
+                }else{
+                    echo "<div class='block line'>";        
+                }
+            }else{
+                if($k==0){
+                    echo "<div class='block right'>";
+                }else{
+                    echo "<div class='block line'>";
+                }
+            }
+        }else{
+            echo "<div class='block line'>";
+        }
         echo "接駁車";
-        echo "<div class='point'></div>";
+        echo "<div class='point'>$key</div>";
         echo $station['name'];
         echo "</div>";
     }
