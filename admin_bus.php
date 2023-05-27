@@ -27,7 +27,7 @@
                                             1.使用ajax向後端取得資料(edit())
                                             2.使用jquery來切換畫面上各區塊的顯示狀態 -->
              <button class="btn btn-warning" onclick="edit(<?=$row['id'];?>);$('.edit').show();$('.list,.add').hide()">編輯</button>
-             <button class="btn btn-danger">刪除</button>
+             <button class="btn btn-danger" onclick="del('bus',<?=$row['id'];?>)">刪除</button>
          </td>
      </tr>
      <?php 
@@ -91,6 +91,12 @@
 
             //將bus物件中的id資料寫入到頁面上id為editId的input欄位的值
             $("#editId").val(bus.id);
+        })
+    }
+
+    function del(table,id){
+        $.post("./api/del.php",{table,id},()=>{
+            location.reload();
         })
     }
  </script>
