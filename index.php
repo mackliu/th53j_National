@@ -42,12 +42,18 @@ foreach($tmp as $k => $t){
 print_r($tmp);
 echo "</pre>"; */
 
-foreach($tmp as $t){
+foreach($tmp as $key => $t){
+    if($key%2==1){
+        echo "<div class='d-flex w-100 justify-content-end'>";
+    }else{
+        echo "<div class='d-flex w-100'>";
+    }
     foreach($t as $station){
         echo "<div class='block'>";
         echo $station['name'];
         echo "</div>";
     }
+    echo "</div>";
 }
 
 
