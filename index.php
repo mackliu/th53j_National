@@ -85,24 +85,41 @@
 <?php 
 $sql="select * from `station`";
 $stations=$pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+$timer=[];
+$arrive=0;
+$leave=0;
+foreach($stations as $station){
+    $arrive=$leave+$station['minute'];
+    $leave=$arrive+$station['waiting'];
+
+    $timer[$station['name']]['arrive']=$arrive;
+    $timer[$station['name']]['leave']=$leave;
+}
+/*  echo "<pre>"; 
+ print_r($timer); 
+ echo "</pre>";  */
+
 $tmp=[];
 foreach($stations as $key => $station){
     $tmp[floor($key/3)][]=$station;
 }
-/* echo "<pre>"; */
-/* print_r($tmp); */
-/* echo "</pre>"; */
+/*   echo "<pre>"; 
+ print_r($tmp); 
+ echo "</pre>";  */ 
 
 foreach($tmp as $k => $t){
     if($k%2==1){
-        array_reverse($t);
-        $tmp[$k]=$t;
+        $tmp[$k]=array_reverse($t);
     }
 }
 
 /* echo "<pre>";
 print_r($tmp);
 echo "</pre>"; */
+
+//所有的車子資料撈出來
+$sql="select * from `bus` ";
+$buses=$pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
 foreach($tmp as $key => $t){
     if($key%2==1){
@@ -141,7 +158,26 @@ foreach($tmp as $key => $t){
         }else{
             echo "<div class='block line'>";
         }
-        echo "接駁車";
+        
+        $gap=[];
+        foreach($buses as $bus){
+            if($bus['minute']-$timer[$station['name']]['arrive']>=0 && $bus['minute']-$timer[$station['name']]['leave']<=0){
+                echo $bus['name'];
+                echo "已到站";
+            }else if($bus['minute']-$timer[$station['name']]['arrive']<0 ){
+                $gap[$bus['name']]=abs($bus['minute']-$timer[$station['name']]['arrive']);
+            }
+        }
+        if(!empty($gap)){
+            $min=min($gap);
+            $name=array_search($min,$gap);
+            echo $name ;
+            echo "約".$min."分鐘";
+        }
+        
+        $gap=[];
+
+
         echo "<div class='point'></div>";
         echo $station['name'];
         echo "</div>";
