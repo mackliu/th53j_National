@@ -13,7 +13,28 @@
             width:200px;
             height:100px;
             border:1px solid #ccc;
+            display: flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
 
+
+        }
+        .point{
+            width:25px;
+            height:25px;
+            border-radius:50%;
+            background-color:skyblue;
+            display: flex;
+            justify-content:center;
+            align-items:center;
+        }
+        .point::before{
+            content:"";
+            width:20px;
+            height:20px;
+            border:3px solid white;
+            border-radius:50%;
         }
     </style>
 </head>
@@ -50,6 +71,8 @@ foreach($tmp as $key => $t){
     }
     foreach($t as $station){
         echo "<div class='block'>";
+        echo "接駁車";
+        echo "<div class='point'></div>";
         echo $station['name'];
         echo "</div>";
     }
