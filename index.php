@@ -13,9 +13,9 @@
          * 建立一個站點的基本外框
          */
         .block{
-            width:200px;
-            height:100px;
-            border:1px solid #ccc;
+            width:300px;
+            height:200px;
+            /* border:1px solid #ccc; */
             display: flex;
             flex-direction:column;
             justify-content:center;
@@ -51,7 +51,7 @@
         .right::after{
             content:"";
             width:50%;
-            height:18px;
+            height:8px;
             background-color:skyblue;
             position:absolute;
             right:0;
@@ -61,7 +61,7 @@
         .left::after{
             content:"";
             width:50%;
-            height:18px;
+            height:8px;
             background-color:skyblue;
             position:absolute;
             left:0;
@@ -71,7 +71,7 @@
         .line::after{
             content:"";
             width:100%;
-            height:18px;
+            height:8px;
             background-color:skyblue;
             position:absolute;
             left:0;
@@ -79,8 +79,8 @@
 
         /**建立一個畫垂直線的class */
         .connect{
-            width:18px;
-            height:100px;
+            width:8px;
+            height:200px;
             background:skyblue;
             top:50%;
         }
@@ -100,7 +100,7 @@
 </head>
 <body>
 <?php include "header.php";?>
-<div class="d-flex flex-wrap " style="width:600px">
+<div class="d-flex flex-wrap m-auto shadow p-5" style="width:900px">
 <?php 
 
 //取出所有的站點資料
