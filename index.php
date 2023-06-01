@@ -47,33 +47,32 @@
             border-radius:50%;
         }
 
-        /**建立一個只畫右邊直線的class */
-        .right::after{
+        .right::after,
+        .left::after,
+        .line::after{
             content:"";
-            width:50%;
-            height:8px;
             background-color:skyblue;
             position:absolute;
+        }
+
+        /**建立一個只畫右邊直線的class */
+        .right::after{
+            width:50%;
+            height:8px;
             right:0;
         }
 
         /**建立一個只畫左邊直線的class */
         .left::after{
-            content:"";
             width:50%;
             height:8px;
-            background-color:skyblue;
-            position:absolute;
             left:0;
         }
 
         /**建立一個畫左右直線的class */
         .line::after{
-            content:"";
             width:100%;
             height:8px;
-            background-color:skyblue;
-            position:absolute;
             left:0;
         }
 
