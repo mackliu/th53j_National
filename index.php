@@ -96,6 +96,11 @@
             position:absolute;
             left:0;
         }
+        .block .bus-info{
+            display:none;
+            position:relative;
+            z-index:100;
+        }
     </style>
 </head>
 <body>
@@ -222,8 +227,14 @@ foreach($tmp as $key => $t){
         //接駁車已行駛時間 < 站點到達時間 < 0 => 未到站
         //接駁車已行駛時間 >= 站點到達時間  && 接駁車已行駛時間 <= 站點離開時間 >= 0 => 已到站
         //接駁車已行駛時間 > 站點離開時間 => 已離站
+        $relation=[];
         foreach($buses as $bus){
-            if(($bus['minute'] >= $timer[$station['name']]['arrive']) && ($bus['minute'] <= $timer[$station['name']]['leave'])){
+            $diff=$bus['minute']-$timer[$station['name']]['arrive'];
+            $relation[$bus['name']]=$diff;
+/*             if($bus['minute']==0){
+                echo $bus['name'];
+                echo "未發車";
+            }else if(($bus['minute'] >= $timer[$station['name']]['arrive']) && ($bus['minute'] <= $timer[$station['name']]['leave'])){
                 //接駁車已到站，顯示到站資訊
                 echo $bus['name'];
                 echo "已到站";
@@ -234,9 +245,11 @@ foreach($tmp as $key => $t){
 
                 //接駁車未到站，將到站時間存入gap陣列中，其中接駁車名為鍵名
                 $gap[$bus['name']]=abs($bus['minute']-$timer[$station['name']]['arrive']);
-            }
+            } */
         }
-
+   /*      echo "<pre>";
+        print_r($relation);
+        echo "</pre>"; */
         //每一部接駁車巡訪完畢後檢視gap陣列中是否有值，及接駁車是否已到站
         //當此站點無已到站的接駁車時，從gap陣列中，取出到站時間最短的接駁車資料
         if(!empty($gap) && $flag==0){
@@ -256,6 +269,11 @@ foreach($tmp as $key => $t){
 
         //顯示此站點名稱
         echo "<div class='point'></div>";
+        echo "<div class='bus-info'>";
+        foreach($relation as $busname => $min){
+            echo $busname.":".$min."<br>";
+        }
+        echo "</div>";
         echo $station['name'];
         echo "</div>";
     }
@@ -268,3 +286,14 @@ foreach($tmp as $key => $t){
 <script src="./bootstrap/bootstrap.js"></script>
 </body>
 </html>
+<script>
+
+    $(".point").hover(
+        function(){
+            $(this).next().show();
+        },
+        function(){
+            $(".block .bus-info").hide();
+        }
+    )
+</script>
