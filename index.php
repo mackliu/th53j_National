@@ -288,17 +288,22 @@ foreach($tmp as $key => $t){
         print_r($min);
         echo "<pre>"; */
                 //顯示此站點名稱
+        
 
         echo "<div class='point'></div>";
         echo "<div class='bus-info'>";
+        $count=0;
         foreach($busInfo as $name => $info){
-            if($info['status']=='已到站'){
-                echo "<span class='arrive'>";
-            }else{
+            if($count<3){
+                if($info['status']=='已到站'){
+                    echo "<span class='arrive'>";
+                }else{
+                    echo "</span>";
+                }
+                echo $name.": ".$info['status']."<br>";
                 echo "</span>";
             }
-            echo $name.": ".$info['status']."<br>";
-            echo "</span>";
+            $count++;
         }
         echo "</div>";
         echo "<div class='block-bottom'>{$station['name']}</div>";
