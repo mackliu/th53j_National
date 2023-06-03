@@ -289,12 +289,35 @@ foreach($tmp as $key => $t){
         echo "<pre>"; */
                 //顯示此站點名稱
         
+        $infoTmp=[];
+        foreach($busInfo as $bus => $info){
+            if($info['status']=="已到站"){
+                $infoTmp['已到站'][$bus]=$info;
+            }else if($info['status']=='已過站'){
+                $infoTmp['已過站'][$bus]=$info;
+            }else{
+                $infoTmp['未到站'][$bus]=$info;
+            }
+        }
+
+        $busList=[];
+        
+        while(count($busList)<3){
+            if(!empty($infoTmp['已到站'])){
+                $busList[array_keys($infoTmp['已到站'])[0]]=array_shift($infoTmp['已到站']);
+            }else if(!empty($infoTmp['未到站'])){
+                $busList[array_keys($infoTmp['未到站'])[0]]=array_shift($infoTmp['未到站']);
+            }else{
+                $busList[array_keys($infoTmp['已過站'])[0]]=array_shift($infoTmp['已過站']);
+            }
+        }
 
         echo "<div class='point'></div>";
         echo "<div class='bus-info'>";
-        $count=0;
-        foreach($busInfo as $name => $info){
-            if($count<3){
+        //$count=0;
+        //foreach($busInfo as $name => $info){
+        foreach($busList as $name => $info){
+            //if($count<3){
                 if($info['status']=='已到站'){
                     echo "<span class='arrive'>";
                 }else{
@@ -302,8 +325,8 @@ foreach($tmp as $key => $t){
                 }
                 echo $name.": ".$info['status']."<br>";
                 echo "</span>";
-            }
-            $count++;
+            //}
+           // $count++;
         }
         echo "</div>";
         echo "<div class='block-bottom'>{$station['name']}</div>";
