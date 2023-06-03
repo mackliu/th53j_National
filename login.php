@@ -38,12 +38,12 @@
     <div class="row w-100 align-items-center">
         <label for="" class="col-2">驗證碼</label>   
         <input  type="text" name="code" id="code" class='form-group form-control col-5'>
-        <div class="btn btn-primary btn-lg m-2">
+        <div class="btn btn-primary btn-lg m-2" id="btnCode">
             <?php
                 echo $_SESSION['code']=rand(1000,9999);
             ?>
         </div>
-        <div class="btn btn-dark m-2">重新產生驗證碼</div>
+        <div class="btn btn-dark m-2" id="resetCode">重新產生驗證碼</div>
     </div>
 
     <div class="row w-100">
@@ -58,3 +58,10 @@
 <script src="./bootstrap/bootstrap.js"></script>
 </body>
 </html>
+<script>
+$("#resetCode").on('click',function(){
+    $.get("./api/reset_code.php",function(code){
+        $("#btnCode").text(code);
+    })
+})
+</script>
