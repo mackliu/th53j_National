@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- 主機： localhost
--- 產生時間： 2023-05-21 01:58:50
--- 伺服器版本： 10.4.24-MariaDB
--- PHP 版本： 8.1.6
+-- 主機： 127.0.0.1
+-- 產生時間： 2023-06-03 09:30:30
+-- 伺服器版本： 10.4.28-MariaDB
+-- PHP 版本： 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- 資料庫： `th53j_national`
+-- 資料庫： `db15`
 --
 
 -- --------------------------------------------------------
@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admin` (
   `id` int(10) UNSIGNED NOT NULL,
-  `acc` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pw` text COLLATE utf8mb4_unicode_ci NOT NULL
+  `acc` text NOT NULL,
+  `pw` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -48,7 +48,7 @@ INSERT INTO `admin` (`id`, `acc`, `pw`) VALUES
 
 CREATE TABLE `bus` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` text NOT NULL,
   `minute` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -57,8 +57,11 @@ CREATE TABLE `bus` (
 --
 
 INSERT INTO `bus` (`id`, `name`, `minute`) VALUES
-(1, 'A1234', 15),
-(2, 'A2345', 25);
+(3, 'A12345', 1),
+(4, 'B12345', 15),
+(5, 'C12345', 30),
+(6, 'D12345', 20),
+(7, 'E12345', 11);
 
 -- --------------------------------------------------------
 
@@ -68,10 +71,24 @@ INSERT INTO `bus` (`id`, `name`, `minute`) VALUES
 
 CREATE TABLE `station` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` text NOT NULL,
   `minute` int(10) NOT NULL,
   `waiting` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- 傾印資料表的資料 `station`
+--
+
+INSERT INTO `station` (`id`, `name`, `minute`, `waiting`) VALUES
+(1, '台北火車站', 0, 5),
+(2, '台北科技大學', 5, 3),
+(3, '市政府捷運站', 4, 3),
+(4, '松山火車站', 3, 5),
+(5, '南港高中', 2, 3),
+(6, '南港火車站', 2, 5),
+(7, '南港高工', 1, 3),
+(8, '南港展覽館', 3, 5);
 
 --
 -- 已傾印資料表的索引
@@ -109,13 +126,13 @@ ALTER TABLE `admin`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `bus`
 --
 ALTER TABLE `bus`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `station`
 --
 ALTER TABLE `station`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
