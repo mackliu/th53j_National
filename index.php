@@ -271,12 +271,17 @@ foreach($tmp as $key => $t){
             }
         }
 
-        if($flag==0){
+        if($flag==0 && $min['bus']!=""){
             echo "<div class='block-top'>";
             echo $min['bus'] . "<br>";
             echo "約".abs($min['min'])."分鐘";
             echo "</div>";
+        }
 
+        if($flag==0 && $min['bus']==""){
+            echo "<div class='block-top' style='color:#999'>";
+            echo "未發車";
+            echo "</div>"; 
         }
         /* echo "<pre>";
         print_r($busInfo);
