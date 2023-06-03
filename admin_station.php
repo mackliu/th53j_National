@@ -4,10 +4,10 @@
     </h1>
     <table class="table table-bordered text-center">
     <tr>
-        <td class="col-3">站點名稱</td>
-        <td class="col-3">行駛時間(分鐘)</td>
-        <td class="col-3">停留時間(分鐘)</td>
-        <td class="col-3">操作</td>
+        <td style="width:40%">站點名稱</td>
+        <td style="width:20%">行駛時間(分鐘)</td>
+        <td style="width:20%">停留時間(分鐘)</td>
+        <td style="width:20%">操作</td>
     </tr>
     <?php 
     $sql="select * from `station`";
