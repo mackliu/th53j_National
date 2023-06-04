@@ -2,11 +2,11 @@
     <h1 class="border p-3 text-center my-3">接駁車管理 
         <button class="btn btn-success" onclick="$('.add').show();$('.list,.edit').hide()">新增</button>
     </h1>
-     <table class="table table-bordered text-center">
+     <table class="table table-bordered text-center w-100">
      <tr>
-         <td class="col-4">車牌</td>
-         <td class="col-4">已行駛時間</td>
-         <td class="col-4">操作</td>
+         <td style="width:50%">車牌</td>
+         <td style="width:25%">已行駛時間</td>
+         <td style="width:25%">操作</td>
      </tr>
      <?php 
 

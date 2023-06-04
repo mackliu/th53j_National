@@ -14,8 +14,15 @@
     <h1 class="text-center">網站管理-登入</h1>
     <form action="./api/login.php" method="post">
     <?php 
-        if(isset($_GET['error'])){
-            echo "<div class='text-danger text-center my-3'>帳號或密碼錯誤</div>";
+        if(isset($_GET['error']) ){
+            switch($_GET['error']){
+                case 1:
+                    echo "<div class='text-danger text-center my-3'>帳號或密碼錯誤</div>";
+                break;
+                case 2:
+                        echo "<div class='text-danger text-center my-3'>驗證碼錯誤，請重新輸入</div>";
+                break;
+            }
         }
 
 
@@ -28,14 +35,17 @@
         <label for="" class="col-2">密碼</label>   
         <input  type="password" name="pw" id="pw" class='form-group form-control col-10'>
     </div>
-    <div class="row w-100">
+    <div class="row w-100 align-items-center">
         <label for="" class="col-2">驗證碼</label>   
-        <input  type="text" name="code" id="code" class='form-group form-control col-10'>
+        <input  type="text" name="code" id="code" class='form-group form-control col-5'>
+        <div class="btn btn-primary btn-lg m-2" id="btnCode">
+            <?php
+                echo $_SESSION['code']=rand(1000,9999);
+            ?>
+        </div>
+        <div class="btn btn-dark m-2" id="resetCode">重新產生驗證碼</div>
     </div>
-    <div class="row w-100 justify-content-end">
-        <div class="btn btn-primary m-2">2132</div>
-        <div class="btn btn-dark m-2">重新產生驗證碼</div>
-    </div>
+
     <div class="row w-100">
         <input  type="submit" value="登入" class='col-12 btn btn-success '>
     </div>
@@ -48,3 +58,10 @@
 <script src="./bootstrap/bootstrap.js"></script>
 </body>
 </html>
+<script>
+$("#resetCode").on('click',function(){
+    $.get("./api/reset_code.php",function(code){
+        $("#btnCode").text(code);
+    })
+})
+</script>
