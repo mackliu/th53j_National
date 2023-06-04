@@ -237,21 +237,22 @@ foreach($tmp as $key => $t){
         
 
         //巡訪每一部接駁車，計算接駁車和此站點的時間關係
-        //接駁車已行駛時間 < 站點到達時間 < 0 => 未到站
-        //接駁車已行駛時間 >= 站點到達時間  && 接駁車已行駛時間 <= 站點離開時間 >= 0 => 已到站
-        //接駁車已行駛時間 > 站點離開時間 => 已離站
+        
+        //建立一個陣列用來儲存每部接駁車目前和此一站點的到站時間及離站時間差距
         $busInfo=[];
         foreach($buses as $bus){
             $busInfo[$bus['name']]['arrive']=$bus['minute']-$timer[$station['name']]['arrive'];
             $busInfo[$bus['name']]['leave']=$bus['minute']-$timer[$station['name']]['leave'];
         }   
-        /* echo "<pre>";
-        print_r($busInfo);
-        echo "</pre>"; */
-        //每一部接駁車巡訪完畢後檢視gap陣列中是否有值，及接駁車是否已到站
-        //當此站點無已到站的接駁車時，從gap陣列中，取出到站時間最短的接駁車資料
+
+        //建立一個暫用的陣列，用來儲存距離此站點到站時間最短的接駁，預設給一個極小值
         $min=['min'=>-999999,'bus'=>""];
-        $flag=0;
+        $flag=0;  //建立一個標記，用來標記已到站的接駁車
+
+        //巡訪每一部接駁車的資訊,依以下原則進行狀態的紀錄
+        //接駁車已行駛時間 < 站點到達時間 < 0 => 未到站
+        //接駁車已行駛時間 >= 站點到達時間  && 接駁車已行駛時間 <= 站點離開時間 >= 0 => 已到站
+        //接駁車已行駛時間 > 站點離開時間 => 已離站        
         foreach($busInfo as $bus => $info){
             if($info['arrive']>=0 && $info['leave']<=0){
                 $busInfo[$bus]['status']="已到站";
@@ -263,6 +264,8 @@ foreach($tmp as $key => $t){
                 $busInfo[$bus]['status']="已過站";
             }else{
                 $busInfo[$bus]['status']="約".abs($info['arrive'])."分鐘";
+
+                //如果接駁車為未到站的狀態，則更新$min中的最接近車輛資訊
                 if($info['arrive']>$min['min']){
                     $min['min']=$info['arrive'];
                     $min['bus']=$bus;
@@ -270,6 +273,7 @@ foreach($tmp as $key => $t){
             }
         }
 
+        //判斷未到站及$min的資訊有被更新過
         if($flag==0 && $min['bus']!=""){
             echo "<div class='block-top'>";
             echo $min['bus'] . "<br>";
@@ -277,17 +281,22 @@ foreach($tmp as $key => $t){
             echo "</div>";
         }
 
+        //判斷首站無發車的狀態
         if($flag==0 && $min['bus']==""){
             echo "<div class='block-top' style='color:#999'>";
             echo "未發車";
             echo "</div>"; 
         }
-        /* echo "<pre>";
-        print_r($busInfo);
-        print_r($min);
-        echo "<pre>"; */
-                //顯示此站點名稱
-        
+
+
+        /**
+         * 可選功能:
+         * 除了直接印出陣列中的前三部接駁車的做法外，
+         * 此做法為將接駁車分為已到站，未到站，已過站三個次陣列
+         * 然後依照已到站＞未到站＞已過站的順序，選三部接駁車的資訊放入到彈出框中顯示
+         */
+
+         //將接駁車的狀態依照已到站、未到站、已過站三種狀態分成三個陣列
         $infoTmp=[];
         foreach($busInfo as $bus => $info){
             if($info['status']=="已到站"){
@@ -299,8 +308,11 @@ foreach($tmp as $key => $t){
             }
         }
 
+        //建立一個陣列用來儲存最後要顯示在頁面上的三部接駁車資訊
         $busList=[];
         
+        //依照已到站,未到站,已過站的順序將接駁車資料放入到$busList陣列中
+        //使用while迴圈來執行選車的動作直到$busList中的接駁車滿三部為止
         while(count($busList)<3){
             if(!empty($infoTmp['已到站'])){
                 $busList[array_keys($infoTmp['已到站'])[0]]=array_shift($infoTmp['已到站']);
@@ -311,23 +323,31 @@ foreach($tmp as $key => $t){
             }
         }
 
+        //顯示站點圈圈
         echo "<div class='point'></div>";
+
+        //建立一個容器用來放三輛接駁車資訊,此容器預設為不顯示(display:none)
         echo "<div class='bus-info'>";
-        //$count=0;
-        //foreach($busInfo as $name => $info){
+        //$count=0;  //建立一個計數器，當迴圈跑完前三次時就停止
+        //foreach($busInfo as $name => $info){ //只取前三車時的寫法
         foreach($busList as $name => $info){
             //if($count<3){
                 if($info['status']=='已到站'){
-                    echo "<span class='arrive'>";
+
+                    //已到站的車以紅字顯示
+                    echo "<div class='arrive'>";
+
                 }else{
-                    echo "</span>";
+                    echo "<div>";
                 }
-                echo $name.": ".$info['status']."<br>";
-                echo "</span>";
+                echo $name.": ".$info['status'];
+                echo "</div>";
             //}
            // $count++;
         }
         echo "</div>";
+
+        //顯示站點名稱
         echo "<div class='block-bottom'>{$station['name']}</div>";
         echo "</div>";
     }
@@ -341,11 +361,12 @@ foreach($tmp as $key => $t){
 </body>
 </html>
 <script>
-
+    //當滑鼠移到站點圈圈上時，顯示接駁車資訊彈出視窗
     $(".point").hover(
         function(){
             $(this).next().show();
         },
+        //當滑鼠移出站點圈圈時，隱藏接駁車資訊彈出視窗
         function(){
             $(".block .bus-info").hide();
         }
