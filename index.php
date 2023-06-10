@@ -256,10 +256,16 @@ foreach($tmp as $key => $t){
         foreach($busInfo as $bus => $info){
             if($info['arrive']>=0 && $info['leave']<=0){
                 $busInfo[$bus]['status']="已到站";
-                echo "<div class='block-top arrive'>";
-                echo $bus . "<br>已到站";
-                echo "</div>";
-                $flag=1;
+                
+                //判斷是否有車為已到站，如果有則加上flag，
+                //如果同時有多部車為已到站的情形，則依照flag的狀態
+                //只需顯示一筆已到站的訊息即可
+                if($flag!=1){
+                    echo "<div class='block-top arrive'>";
+                    echo $bus . "<br>已到站";
+                    echo "</div>";
+                    $flag=1;
+                }
             }else if($info['leave']>0){
                 $busInfo[$bus]['status']="已過站";
             }else{
