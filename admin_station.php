@@ -19,12 +19,14 @@
             $up=$row['id'] . '-' . $rows[$key-1]['id'];
         }else{
             $up=$row['id'] . '-' . $row['id'];
+            $down=$row['id'] . '-' . $rows[$key+1]['id'];
         }
 
         if($key != array_key_last($rows)){
             $down=$row['id']. '-' . $rows[$key+1]['id'];
         }else{
-            $up=$row['id'] . '-' . $row['id'];
+            $down=$row['id'] . '-' . $row['id'];
+            $up=$row['id'] . '-' . $rows[$key-1]['id'];
         }
 
     ?>
