@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2023-06-03 09:30:30
--- 伺服器版本： 10.4.28-MariaDB
--- PHP 版本： 8.2.4
+-- 產生時間： 2023-06-10 04:27:01
+-- 伺服器版本： 10.4.27-MariaDB
+-- PHP 版本： 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -57,11 +57,9 @@ CREATE TABLE `bus` (
 --
 
 INSERT INTO `bus` (`id`, `name`, `minute`) VALUES
-(3, 'A12345', 1),
-(4, 'B12345', 15),
-(5, 'C12345', 30),
-(6, 'D12345', 20),
-(7, 'E12345', 11);
+(1, 'A12345', 0),
+(2, 'B12345', 15),
+(3, 'C12345', 30);
 
 -- --------------------------------------------------------
 
@@ -85,7 +83,7 @@ INSERT INTO `station` (`id`, `name`, `minute`, `waiting`) VALUES
 (2, '台北科技大學', 5, 3),
 (3, '市政府捷運站', 4, 3),
 (4, '松山火車站', 3, 5),
-(5, '南港高中', 2, 3),
+(5, '南港高中', 2, 5),
 (6, '南港火車站', 2, 5),
 (7, '南港高工', 1, 3),
 (8, '南港展覽館', 3, 5);
@@ -126,7 +124,7 @@ ALTER TABLE `admin`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `bus`
 --
 ALTER TABLE `bus`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `station`

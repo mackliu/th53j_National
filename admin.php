@@ -56,5 +56,6 @@ if(!isset($_SESSION['login'])){
 
 <script src="./jquery/jquery.js"></script>
 <script src="./bootstrap/bootstrap.js"></script>
+<script src="js.js"></script>
 </body>
 </html>

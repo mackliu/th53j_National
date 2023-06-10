@@ -126,7 +126,7 @@
 </head>
 <body>
 <?php include "header.php";?>
-<div class="d-flex flex-wrap m-auto shadow p-5" style="width:996px">
+<div class="d-flex flex-wrap my-4 mx-auto shadow p-5" style="width:996px">
 <?php 
 
 //取出所有的站點資料

@@ -26,7 +26,7 @@
                                         <!-- 在按鈕標籤中直接觸發onclick事件，並在事件發生時執行：
                                             1.使用ajax向後端取得資料(edit())
                                             2.使用jquery來切換畫面上各區塊的顯示狀態 -->
-             <button class="btn btn-warning" onclick="edit(<?=$row['id'];?>);$('.edit').show();$('.list,.add').hide()">編輯</button>
+             <button class="btn btn-warning" onclick="edit('bus',<?=$row['id'];?>);$('.edit').show();$('.list,.add').hide()">編輯</button>
              <button class="btn btn-danger" onclick="del('bus',<?=$row['id'];?>)">刪除</button>
          </td>
      </tr>
@@ -45,7 +45,8 @@
     </div>
     <div class="row w-100">
         <label for="" class="col-2">已行駛時間(分鐘)</label>   
-        <input  type="number" name="minute" id="addMinute" class='form-group form-control col-10'>
+        <input  type="number" name="minute" id="addMinute" class='form-group form-control col-10'
+                min='0' step="1" required>
     </div>
     <div class="row w-100">
         <input  type="submit" value="新增" class='col-12 btn btn-success my-1'>
@@ -58,14 +59,21 @@
  </div>
  <div class="edit" style="display:none">
  <h1 class="border p-3 my-3 text-center">修改「<span id="title"></span>」接駁車</h1>
-    <form action="./api/edit_bus.php" method="post">
+    <form action="./api/edit_bus.php" method="post" id="editBusForm">
     <div class="row w-100">
         <label for="" class="col-2">已行駛時間(分鐘)</label>   
-        <input  type="number" name="minute" id="editMinute" class='form-group form-control col-10'>
+        <input  type="number" 
+                name="minute" 
+                id="editMinute" 
+                class='form-group form-control col-10'
+                min='0'
+                step="1"
+                required>
         <input type="hidden" name="id" id="editId">
+        <div class="text-danger" id="editBusAlert"></div>
     </div>
     <div class="row w-100">
-        <input  type="submit" value="修改" class='col-12 btn btn-success my-1'>
+        <input  type="submit"  value="修改" class='col-12 btn btn-success my-1'>
                                                                            <!-- 在按鈕標籤中直接觸發onclick事件，並在事件發生時執行：
                                                                                 1.使用jquery來切換畫面上各區塊的顯示狀態 -->
         <input  type="button" value="回上頁" class='col-12 btn btn-secondary my-1' onclick="$('.list').show();$('.edit,.add').hide()">
@@ -73,30 +81,3 @@
     </form>
 
  </div>
-
-
- <script>
-    //前端編輯資料用的函式
-    function edit(id){
-
-        //使用getJSON向後端api get_bus.php發出取得資料的請求
-        $.getJSON('./api/get_bus.php',{id},(bus)=>{
-            //api 回傳的資料會是一個json格式的物件
-            console.log(bus)
-            //將bus物件中的name資料寫入到頁面上id為title的tag中
-            $("#title").html(bus.name);
-
-            //將bus物件中的minute資料寫入到頁面上id為editMinute的input欄位的值
-            $("#editMinute").val(bus.minute);
-
-            //將bus物件中的id資料寫入到頁面上id為editId的input欄位的值
-            $("#editId").val(bus.id);
-        })
-    }
-
-    function del(table,id){
-        $.post("./api/del.php",{table,id},()=>{
-            location.reload();
-        })
-    }
- </script>
