@@ -256,7 +256,7 @@ foreach($tmp as $key => $t){
         foreach($busInfo as $bus => $info){
             if($info['arrive']>=0 && $info['leave']<=0){
                 $busInfo[$bus]['status']="已到站";
-                
+
                 //判斷是否有車為已到站，如果有則加上flag，
                 //如果同時有多部車為已到站的情形，則依照flag的狀態
                 //只需顯示一筆已到站的訊息即可
@@ -317,9 +317,13 @@ foreach($tmp as $key => $t){
         //建立一個陣列用來儲存最後要顯示在頁面上的三部接駁車資訊
         $busList=[];
         
+        //增加一個變數來決定要顯示的車子資訊數量
+        //最多三筆
+        $maxBus=(count($buses)>=3)?3:count($buses);
+
         //依照已到站,未到站,已過站的順序將接駁車資料放入到$busList陣列中
         //使用while迴圈來執行選車的動作直到$busList中的接駁車滿三部為止
-        while(count($busList)<3){
+        while(count($busList)<$maxBus){
             if(!empty($infoTmp['已到站'])){
                 $busList[array_keys($infoTmp['已到站'])[0]]=array_shift($infoTmp['已到站']);
             }else if(!empty($infoTmp['未到站'])){
