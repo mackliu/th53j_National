@@ -6,6 +6,15 @@ $("#addMinute,#editMinute,#addWaiting,#editWaiting").on("input",function(){
 })
 
 
+$(".sw").on("click",function(){
+        let ids=$(this).data('id').split("-")
+        console.log(ids)
+        $.post("./api/sw.php",{ids},function(res){
+            //console.log(res)
+            location.reload();
+        })
+})
+
 function del(table,id){
     $.post("./api/del.php",{table,id},()=>{
         location.reload();

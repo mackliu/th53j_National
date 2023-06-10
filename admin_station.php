@@ -4,22 +4,45 @@
     </h1>
     <table class="table table-bordered text-center">
     <tr>
-        <td style="width:40%">站點名稱</td>
+        <td style="width:30%">站點名稱</td>
         <td style="width:20%">行駛時間(分鐘)</td>
         <td style="width:20%">停留時間(分鐘)</td>
-        <td style="width:20%">操作</td>
+        <td style="width:30%">操作</td>
     </tr>
     <?php 
-    $sql="select * from `station`";
+    //取出所有站點資料並依照before欄位進行排序
+    $sql="select * from `station` order by `before`";
     $rows=$pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-    foreach($rows as $row){
+    foreach($rows as $key => $row){
+        if($key !==0 ){
+            $up=$row['id'] . '-' . $rows[$key-1]['id'];
+        }else{
+            $up=$row['id'] . '-' . $row['id'];
+        }
+
+        if($key != array_key_last($rows)){
+            $down=$row['id']. '-' . $rows[$key+1]['id'];
+        }else{
+            $up=$row['id'] . '-' . $row['id'];
+        }
+
     ?>
     <tr>
         <td><?=$row['name'];?></td>
         <td><?=$row['minute'];?></td>
         <td><?=$row['waiting'];?></td>
         <td>
+            <?php
+                if($key != 0 ){
+                    echo "<button class='sw btn btn-info' data-id='$up'>往上</button>"   ;
+                }
+            ?>
+            <?php
+                if($key != array_key_last($rows)){
+                    echo "<button class='sw btn btn-info' data-id='$down'>往下</button>";
+                }
+            ?>
             <button class="btn btn-warning" onclick="edit('station',<?=$row['id'];?>);$('.edit').show();$('.list,.add').hide()">編輯</button>
             <button class="btn btn-danger" onclick="del('station',<?=$row['id'];?>)">刪除</button>
         </td>

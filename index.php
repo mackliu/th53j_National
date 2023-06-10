@@ -129,8 +129,8 @@
 <div class="d-flex flex-wrap my-4 mx-auto shadow p-5" style="width:996px">
 <?php 
 
-//取出所有的站點資料
-$sql="select * from `station`";
+//取出所有的站點資料並依照before欄位進行排序
+$sql="select * from `station` order by `before`";
 $stations=$pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
 //建立一個空陣列用來存放每個站點的應到時間及離開時間
