@@ -26,7 +26,7 @@
         }
         
         .block-top,.block-bottom{
-            height:calc( ( 100% - 25px ) / 2);
+            height:calc( ( 100% - 25px ) / 2); /* */
             display:flex;
             text-align: center;
             padding:5px 0;
@@ -126,7 +126,7 @@
 </head>
 <body>
 <?php include "header.php";?>
-<div class="d-flex flex-wrap my-4 mx-auto shadow p-5" style="width:996px">
+<div class="d-flex flex-wrap my-4 mx-auto shadow p-5" style="width:min-content">
 <?php 
 
 //取出所有的站點資料並依照before欄位進行排序
@@ -138,6 +138,9 @@ $stations=$pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 $timer=[];
 $arrive=0;  //初始到站時間為0
 $leave=0;   //初始離站時間為0
+
+$div=3;
+
 foreach($stations as $station){
 
     //到站時間為前一站的離站時間加上前一站到此站的行駛時間
@@ -156,10 +159,10 @@ foreach($stations as $station){
  print_r($timer); 
  echo "</pre>";  */
 
- //建立一個暫存陣列，用來將站點以３站為一組做分組並存入暫存陣列中
+ //建立一個暫存陣列，用來將站點以$div站為一組做分組並存入暫存陣列中
 $tmp=[];
 foreach($stations as $key => $station){
-    $tmp[floor($key/3)][]=$station;
+    $tmp[floor($key/$div)][]=$station;
 }
 /*   echo "<pre>"; 
  print_r($tmp); 
@@ -182,62 +185,76 @@ echo "</pre>"; */
 $sql="select * from `bus` ";
 $buses=$pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-
-foreach($tmp as $key => $t){
+//$tmp是站點分組的陣列
+//$group是分組的索引值
+//$g則是分組中的站點陣列
+foreach($tmp as $group => $g){
 
     //判斷暫存陣列中的站點分組索引值為奇數或偶數，給予靠左或靠右的排列css
-    if($key%2==1){
+    /**
+     *   -------   0 -> $group
+     *          |
+     *   -------   1 -> $group
+     *  |
+     *   -------   2 -> $group
+     */
+    if($group%2==1){
         echo "<div class='d-flex w-100 justify-content-end position-relative'>";
     }else{
         echo "<div class='d-flex w-100 position-relative'>";
     }
 
     //根據站點總數來判斷是否要加上垂直連接線
-    if((ceil(count($stations)/3)-1)>$key){
+    /**
+     * 分組數目->count($tmp)
+     * 檢查值->分組數目-1 //因為要從0開始算
+     */
+    $chk=count($tmp)-1;
+    if($chk>$group){
 
         //判斷暫存陣列中的站點分組索引值為奇數或偶數，給予垂直連接線靠左或靠右的排列css
-        if($key%2==1){
+        if($group%2==1){
             echo "<div class='connect connect-left'></div>";
         }else{
             echo "<div class='connect connect-right'></div>";
         }
     }
 
-    //將分組中的各個站點進行顯示相關的處理
-    foreach($t as $k => $station){
+    //將分組中的各個站點進行顯示相關的處理，主要是用來決定要畫那種線
+    foreach($g as $idx => $station){
 
         //如果為起始站，則只畫右邊線
-        if($key==0 && $k==0 ){
+        //起始站的定義是 分組($group)為第一組 而且 在第一組中的第一站(索引為0)
+        if($group==0 && $idx==0 ){
             echo "<div class='block right'>";
 
             //如果為最後一站，需進一步判斷是那一個方向的最後一站
-        }else if($key==ceil(count($stations)/3)-1){
+            //最後一站的定義是 分組($group)為最後一組 
+            //最後一組的判斷法為$tmp的最後一個元素的索引值(count($tmp)-1)
+            //
+        }else if($group==(count($tmp)-1)){
        
-            //判斷分組索引值為奇數或偶數
-            if($key%2==0){
-
-                //如果結束在偶數的橫列，則最後站為陣列的最後一個值，只需畫左邊線
-                if($k==count($t)-1){
+            //判斷分組索引值為偶數，而且站點為目前分組的最後一個
+            if($group%2==0 && ($idx==count($g)-1)){
+                
+                    //只需畫左邊的線
                     echo "<div class='block left'>";
-                }else{
-                    echo "<div class='block line'>";        
-                }
+
+            //判斷分組索引值為奇數，而且站點為目前分組的第一個
+            }else if($group%2==1 && $idx==0){
+            
+                    //只需畫右邊的線
+                    echo "<div class='block right'>";
             }else{
 
-                //如果結束在奇數的橫列，則最後站為陣列的第一個值，只需畫右邊線
-                if($k==0){
-                    echo "<div class='block right'>";
-                }else{
-                    echo "<div class='block line'>";
-                }
+                echo "<div class='block line'>";
             }
         }else{
+
             echo "<div class='block line'>";
         }
-        
 
         //巡訪每一部接駁車，計算接駁車和此站點的時間關係
-        
         //建立一個陣列用來儲存每部接駁車目前和此一站點的到站時間及離站時間差距
         $busInfo=[];
         foreach($buses as $bus){
@@ -293,7 +310,6 @@ foreach($tmp as $key => $t){
             echo "未發車";
             echo "</div>"; 
         }
-
 
         /**
          * 可選功能:
