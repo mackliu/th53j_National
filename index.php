@@ -17,25 +17,34 @@
             height:200px;
             /* border:1px solid #ccc; */
             display: flex;
-            /* flex-direction:column; */
+            flex-direction:column;
             justify-content:center;
             align-items:center;
             position:relative;
         }
         
         .block-top,.block-bottom{
-            height:calc( ( 100% - 25px ) / 2);
+            
             padding:5px;
             width:calc( ( 100% - 25px ) / 2);
             display: flex;
             align-items: center;
+            justify-content: center;
+            z-index:9;
+            margin:2px 0;
         }
         .block-top{
-            text-align: right;
-            justify-content: end;
+            text-align: center;
+            justify-content: center;
+            background:white;
+            border:3px solid skyblue;
+            border-radius:16px;
         }
         .block-bottom{
-            text-align-last: left;
+            background-color:white;
+            border:3px solid skyblue;
+            border-radius:16px;
+
         }
         /**建立站點的外型圓點 */
         .point{
