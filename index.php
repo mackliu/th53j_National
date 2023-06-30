@@ -126,7 +126,7 @@
 </head>
 <body>
 <?php include "header.php";?>
-<div class="d-flex flex-wrap my-4 mx-auto shadow p-5" style="width:996px">
+<div class="d-flex flex-wrap my-4 mx-auto shadow p-5" style="width:min-content">
 <?php 
 
 //取出所有的站點資料並依照before欄位進行排序
@@ -138,6 +138,9 @@ $stations=$pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 $timer=[];
 $arrive=0;  //初始到站時間為0
 $leave=0;   //初始離站時間為0
+
+$div=1; //設定一個用來決定每行有幾個站點的變數
+
 foreach($stations as $station){
 
     //到站時間為前一站的離站時間加上前一站到此站的行駛時間
@@ -159,7 +162,7 @@ foreach($stations as $station){
  //建立一個暫存陣列，用來將站點以３站為一組做分組並存入暫存陣列中
 $tmp=[];
 foreach($stations as $key => $station){
-    $tmp[floor($key/3)][]=$station;
+    $tmp[floor($key/$div)][]=$station;
 }
 /*   echo "<pre>"; 
  print_r($tmp); 
@@ -193,7 +196,7 @@ foreach($tmp as $key => $t){
     }
 
     //根據站點總數來判斷是否要加上垂直連接線
-    if((ceil(count($stations)/3)-1)>$key){
+    if((ceil(count($stations)/$div)-1)>$key){
 
         //判斷暫存陣列中的站點分組索引值為奇數或偶數，給予垂直連接線靠左或靠右的排列css
         if($key%2==1){
@@ -211,7 +214,7 @@ foreach($tmp as $key => $t){
             echo "<div class='block right'>";
 
             //如果為最後一站，需進一步判斷是那一個方向的最後一站
-        }else if($key==ceil(count($stations)/3)-1){
+        }else if($key==ceil(count($stations)/$div)-1){
        
             //判斷分組索引值為奇數或偶數
             if($key%2==0){
