@@ -17,24 +17,26 @@
             height:200px;
             /* border:1px solid #ccc; */
             display: flex;
-            flex-direction:column;
+            /* flex-direction:column; */
             justify-content:center;
             align-items:center;
             position:relative;
-
-
         }
         
         .block-top,.block-bottom{
             height:calc( ( 100% - 25px ) / 2);
-            display:flex;
-            text-align: center;
-            padding:5px 0;
+            padding:5px;
+            width:calc( ( 100% - 25px ) / 2);
+            display: flex;
+            align-items: center;
         }
         .block-top{
-            align-items:flex-end;
+            text-align: right;
+            justify-content: end;
         }
-
+        .block-bottom{
+            text-align-last: left;
+        }
         /**建立站點的外型圓點 */
         .point{
             width:25px;
@@ -57,12 +59,30 @@
             border-radius:50%;
         }
 
+        .up::after,
+        .down::after,
         .right::after,
         .left::after,
-        .line::after{
+        .line::after,
+        .vertical::after{
             content:"";
             background-color:skyblue;
             position:absolute;
+        }
+
+
+        /**建立一個只畫上直線的class */
+        .up::after{
+            width:8px;
+            height:50%;
+            top:0;
+        }
+
+        /**建立一個只畫下直線的class */
+        .down::after{
+            width:8px;
+            height:50%;
+            bottom:0;
         }
 
         /**建立一個只畫右邊直線的class */
@@ -85,13 +105,11 @@
             height:8px;
             left:0;
         }
-
-        /**建立一個畫垂直線的class */
-        .connect{
+        /**建立一個畫上下直線的class */
+        .vertical::after{
             width:8px;
-            height:200px;
-            background:skyblue;
-            top:50%;
+            height:100%;
+            top:0;
         }
 
         /**建立一個讓直線靠右邊放置的class */
@@ -104,6 +122,14 @@
         .connect-left{
             position:absolute;
             left:0;
+        }
+
+        /**建立一個畫垂直線的class */
+        .connect{
+            width:8px;
+            height:200px;
+            background:skyblue;
+            top:50%;
         }
         .block .bus-info{
             display:none;
@@ -188,54 +214,23 @@ $buses=$pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
 foreach($tmp as $key => $t){
 
-    //判斷暫存陣列中的站點分組索引值為奇數或偶數，給予靠左或靠右的排列css
-    if($key%2==1){
-        echo "<div class='d-flex w-100 justify-content-end position-relative'>";
-    }else{
-        echo "<div class='d-flex w-100 position-relative'>";
-    }
-
-    //根據站點總數來判斷是否要加上垂直連接線
-    if((ceil(count($stations)/$div)-1)>$key){
-
-        //判斷暫存陣列中的站點分組索引值為奇數或偶數，給予垂直連接線靠左或靠右的排列css
-        if($key%2==1){
-            echo "<div class='connect connect-left'></div>";
-        }else{
-            echo "<div class='connect connect-right'></div>";
-        }
-    }
+    echo "<div class='d-flex w-100 position-relative'>";
 
     //將分組中的各個站點進行顯示相關的處理
     foreach($t as $k => $station){
 
         //如果為起始站，則只畫右邊線
         if($key==0 && $k==0 ){
-            echo "<div class='block right'>";
+            echo "<div class='block down'>";
 
             //如果為最後一站，需進一步判斷是那一個方向的最後一站
         }else if($key==ceil(count($stations)/$div)-1){
-       
-            //判斷分組索引值為奇數或偶數
-            if($key%2==0){
 
-                //如果結束在偶數的橫列，則最後站為陣列的最後一個值，只需畫左邊線
-                if($k==count($t)-1){
-                    echo "<div class='block left'>";
-                }else{
-                    echo "<div class='block line'>";        
-                }
-            }else{
+            echo "<div class='block up'>";
 
-                //如果結束在奇數的橫列，則最後站為陣列的第一個值，只需畫右邊線
-                if($k==0){
-                    echo "<div class='block right'>";
-                }else{
-                    echo "<div class='block line'>";
-                }
-            }
         }else{
-            echo "<div class='block line'>";
+
+            echo "<div class='block vertical'>";
         }
         
 
