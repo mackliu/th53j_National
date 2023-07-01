@@ -122,11 +122,41 @@
         .nobus{
             color:#666;
         }
+        .station-num{
+            width:25px;
+            height:25px;
+            display:inline-flex;
+            justify-content:center;
+            align-items:center;
+            border:1px solid #555;
+            border-radius:50%;
+            margin:5px;
+        }
+        .active{
+            background:blue;
+            color:white;
+            font-weight:bold;
+        }
     </style>
 </head>
 <body>
 <?php include "header.php";?>
 <div class="d-flex flex-wrap my-4 mx-auto shadow p-5" style="width:min-content">
+<div>
+    <?php
+    if(isset($_GET['p'])){
+        $active=$_GET['p'];
+    }else{
+        $active=3;
+    }
+    ?>
+    <div class="station-num <?=($active==1)?'active':'';?>" id="s1" onclick="showStation(1)">1</div>
+    <div class="station-num <?=($active==2)?'active':'';?>" id="s2" onclick="showStation(2)">2</div>
+    <div class="station-num <?=($active==3)?'active':'';?>" id="s3" onclick="showStation(3)">3</div>
+    <div class="station-num <?=($active==4)?'active':'';?>" id="s4" onclick="showStation(4)">4</div>
+    <div class="station-num <?=($active==5)?'active':'';?>" id="s5" onclick="showStation(5)">5</div>
+
+</div>
 <?php 
 
 //取出所有的站點資料並依照before欄位進行排序
@@ -139,7 +169,8 @@ $timer=[];
 $arrive=0;  //初始到站時間為0
 $leave=0;   //初始離站時間為0
 
-$div=3;
+$div=$_GET['p']??3;
+//$div=isset($_GET['p'])?$_GET['p']:3;
 
 foreach($stations as $station){
 
@@ -397,4 +428,10 @@ foreach($tmp as $group => $g){
             $(".block .bus-info").hide();
         }
     )
+
+    function showStation(num){
+        location.href='?p='+num;
+    }
+
+
 </script>
