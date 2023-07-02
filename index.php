@@ -55,6 +55,9 @@
             border-radius:50%;
         }
 
+        /**設定畫直線三個class的共同設定
+         * 包含背景顏色及定位方式
+         */
         .right::after,
         .left::after,
         .line::after{
@@ -103,6 +106,14 @@
             position:absolute;
             left:0;
         }
+
+        /**
+         * 彈出視窗: 
+         * 預設不顯示，滑鼠移進站點時才顯示
+         * 背景設為白色用來遮住底層的資訊,營造彈出視窗在上層的感覺
+         * position:absolute為絕對定位，位置為.block中的位置
+         * z-index:垂直位置，
+         */
         .block .bus-info{
             display:none;
             position:absolute;
@@ -114,12 +125,18 @@
             border-radius:5px;
 
         }
+
+        /**已到站的文字以紅色顯示 */
         .arrive{
             color:red;
         }
+
+        /**未發車的文字以灰色顯示 */
         .nobus{
             color:#666;
         }
+
+        /**站點數量按鈕，做成圓形的 */
         .station-num{
             width:25px;
             height:25px;
@@ -131,6 +148,8 @@
             margin:5px;
             cursor: pointer;
         }
+
+        /**使用在站點數量切換上，當前的站點數量會以背景藍，字白的方式呈現 */
         .active{
             background:blue;
             color:white;
