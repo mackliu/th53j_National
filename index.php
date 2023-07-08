@@ -178,6 +178,7 @@
     <div class="station-num <?=($active==5)?'active':'';?>" id="s5" onclick="showStation(5)">5</div>
 
 </div>
+<h1>HIHI</h1>
 <?php 
 
 //取出所有的站點資料並依照before欄位進行排序
