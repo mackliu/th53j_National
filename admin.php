@@ -38,6 +38,7 @@ if(!isset($_SESSION['login'])){
                             <!-- 根據$pos的值來決定導覽按鈕要啟用(active)那個按鈕 -->
         <a class="btn btn-light <?=($pos=='bus')?'active':'';?>" href="?pos=bus">接駁車管理</a>
         <a class="btn btn-light <?=($pos=='station')?'active':'';?>" href="?pos=station">站點管理</a>
+        <a class="btn btn-light <?=($pos=='form')?'active':'';?>" href="?pos=form">表單設定</a>
     </div>
     
     <?php
@@ -49,6 +50,9 @@ if(!isset($_SESSION['login'])){
             break;
             case "station":
                 include "admin_station.php";   //載入站點管理頁面
+            break;
+            case "form":
+                include "admin_form.php";   //載入站點管理頁面
             break;
         }
     ?>
