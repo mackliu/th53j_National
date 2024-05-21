@@ -160,7 +160,7 @@
 <body>
 <?php include "header.php";?>
 <div class="d-flex flex-wrap my-4 mx-auto shadow p-5" style="width:min-content">
-<div>
+<div class='w-100'>
     <?php
     //透過網此參數來決定$active的值，預設為3
     if(isset($_GET['p'])){
@@ -176,9 +176,8 @@
     <div class="station-num <?=($active==3)?'active':'';?>" id="s3" onclick="showStation(3)">3</div>
     <div class="station-num <?=($active==4)?'active':'';?>" id="s4" onclick="showStation(4)">4</div>
     <div class="station-num <?=($active==5)?'active':'';?>" id="s5" onclick="showStation(5)">5</div>
-
 </div>
-<h1>HIHI</h1>
+<h1 class='text-center w-100'>接駁車路網圖</h1>
 <?php 
 
 //取出所有的站點資料並依照before欄位進行排序
